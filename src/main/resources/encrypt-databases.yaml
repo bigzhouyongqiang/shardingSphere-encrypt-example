@@ -1,0 +1,23 @@
+dataSource:  !!com.zaxxer.hikari.HikariDataSource
+  driverClassName: com.mysql.cj.jdbc.Driver
+  jdbcUrl: jdbc:mysql://localhost:3306/shardingspheretest?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=UTF-8
+  username: root
+  password: 123123
+
+  # 配置加密规则
+encryptRule:
+  tables:
+    t_order:
+      columns:
+        user_id:
+          cipherColumn: user_id
+          encryptor: order_encryptor
+  # 配置加密参数
+  encryptors:
+    order_encryptor:
+      type: aes
+      props:
+        aes.key.value: 123456
+
+props:
+  query.with.cipher.column: true
